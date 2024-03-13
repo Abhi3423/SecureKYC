@@ -3,6 +3,7 @@ import { NoRouteFound } from "./NoRouteFound";
 import Home from "../components/Home/home";
 import Kyc from "../components/KYC/kyc";
 import LanguageSelection from "../components/KYC/LanguageSelection";
+import DialPad from "../components/KYC/DialPad";
 
 const AppRoute = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoute = () => {
         }
       />
       <Route path="/language-selection" element={<LanguageSelection />} />
+      <Route path="/dial-pad" element={<DialPad />} />
 
       <Route path="*" element={<NoRouteFound />} />
     </Routes>

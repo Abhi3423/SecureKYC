@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <header className="bg-white">
-      <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 p-2">
+      <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 p-2 m-2">
         <a className="block text-teal-600" href="#">
           <span className="sr-only">Home</span>
           <div className="w-16 h-14">
