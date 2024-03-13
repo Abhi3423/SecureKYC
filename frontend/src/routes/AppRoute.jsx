@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { NoRouteFound } from "./NoRouteFound";
 import Home from "../components/Home/home";
 import Kyc from "../components/KYC/kyc";
+import LanguageSelection from "../components/KYC/LanguageSelection";
 
 const AppRoute = () => {
   return (
@@ -10,12 +11,13 @@ const AppRoute = () => {
       <Route
         path="/kyc-process"
         element={
-            <>
-              <Kyc />
-            </>
+          <>
+            <Kyc />
+          </>
         }
       />
-      
+      <Route path="/language-selection" element={<LanguageSelection />} />
+
       <Route path="*" element={<NoRouteFound />} />
     </Routes>
   );
