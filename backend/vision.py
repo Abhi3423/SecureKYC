@@ -5,7 +5,7 @@ from google_vision_ai import VisionAI
 from google_vision_ai import prepare_image_local
 from tools import extract_12_digit_numbers
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "./standard-chartered-417102-b1b3d7a9f6d9.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "./standard-chartered-417102-aceef618da22.json"
 client = vision.ImageAnnotatorClient()
 
 image_file_path = "./me_aadhar.jpg"
