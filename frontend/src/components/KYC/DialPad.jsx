@@ -21,63 +21,33 @@ const DialPad = () => {
       </div>
       <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8">
         <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            1
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>1</p> <p className="text-sm ">English</p>
           </button>
         </div>
         <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            2
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>2</p> <p className="text-sm ">हिन्दी</p>
           </button>
         </div>
         <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            3
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>3</p> <p className="text-sm ">தமிழ்</p>
           </button>
         </div>
         <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            4
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>4</p> <p className="text-sm ">తెలుగు</p>
           </button>
         </div>
         <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            5
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>5</p> <p className="text-sm ">বাংলা</p>
           </button>
         </div>
         <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            6
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            7
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            8
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            9
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            *
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            0
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            #
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>6</p> <p className="text-sm ">മലയാളം</p>
           </button>
         </div>
       </div>
