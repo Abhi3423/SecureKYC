@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 import json
 import vision_speech
+import boto_functions
+import recognise
 
 app = Flask(__name__)
 CORS(app)
@@ -76,9 +78,13 @@ def ocr_front():
     if request.method == 'POST':
         data = request.get_json()
         
-        response = vision_speech.ocr_front(data['image'].split(",")[1])  # Call vision_speech.ocr_front() to extract data from the front of the Aadhar card
+        customer_data_response = vision_speech.ocr_front(data['image'].split(",")[1])  # Call vision_speech.ocr_front() to extract data from the front of the Aadhar card
         
-        return jsonify(response)
+        upload_url = boto_functions.upload_card_photo(data['image'].split(",")[1])  # Call boto_functions.upload_card_photo() to upload the Aadhar card image
+        
+        response = recognise.check_faces()  # Call recognise.check_faces() to check if the uploaded image contains a face
+        
+        return jsonify({"customer_data": customer_data_response, "upload_url": upload_url, "response": response})
     
 @app.route('/ocr_back', methods=['POST'])
 def ocr_back():
@@ -97,6 +103,24 @@ def get_data():
             data = json.load(f)  # Load the JSON data from the file
         
         return jsonify(data)  # Return the extracted data
+    
+@app.route('/post_user_image', methods=['POST'])
+def post_image():
+    if request.method == 'POST':
+        data = request.get_json()
+        
+        response = boto_functions.upload_user_photo(data['image'].split(",")[1])
+        
+        with open('pesonal_user_data.json', 'r') as outfile:
+            customer_data = json.load(outfile)
+            
+        customer_data["image_url"] = response
+        
+        with open('personal_user_data.json', 'w') as outfile:
+            json.dump(customer_data, outfile)
+            
+        return jsonify({"image_url": response})
+        
                 
 if __name__ == '__main__':
     app.run()
