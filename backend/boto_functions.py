@@ -76,3 +76,22 @@ def upload_card_photo(base64_image):
         return image_url.split("?")[0]
     else:
         return "Error in creating target image url"
+    
+    
+def upload_user_sign(base64_image):
+        
+        data = base64.b64decode(base64_image)
+        image = BytesIO(data)
+        
+        s3.upload_fileobj(
+            Fileobj=image, 
+            Bucket="face-detection-sc-s3", 
+            Key = "sign.jpg"
+            )
+        
+        image_url = create_presigned_url("face-detection-sc-s3", "sign.jpg")
+        
+        if image_url is not None:
+            return image_url.split("?")[0]
+        else:
+            return "Error in creating sign image url"

@@ -1,1 +1,8 @@
-{"default": "https://securekyc.s3.ap-south-1.amazonaws.com/audio/start/default.mp3", "English": "https://sc-s3-004.s3.amazonaws.com/audio/English/start.mp3", "Tamil": "https://sc-s3-004.s3.amazonaws.com/audio/Tamil/start.mp3", "Telugu": "https://sc-s3-004.s3.amazonaws.com/audio/Telugu/start.mp3", "Hindi": "https://sc-s3-004.s3.amazonaws.com/audio/Hindi/start.mp3", "Bangla": "https://sc-s3-004.s3.amazonaws.com/audio/Bangla/start.mp3"}
+{
+    "default": "https://securekyc.s3.ap-south-1.amazonaws.com/audio/start/default.mp3",
+    "0": "https://sc-s3-004.s3.amazonaws.com/audio/English/start.mp3",
+    "1": "https://sc-s3-004.s3.amazonaws.com/audio/Tamil/start.mp3",
+    "2": "https://sc-s3-004.s3.amazonaws.com/audio/Telugu/start.mp3",
+    "4": "https://sc-s3-004.s3.amazonaws.com/audio/Hindi/start.mp3",
+    "5": "https://sc-s3-004.s3.amazonaws.com/audio/Bangla/start.mp3"
+}

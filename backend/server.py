@@ -84,6 +84,14 @@ def ocr_front():
         
         response = recognise.check_faces()  # Call recognise.check_faces() to check if the uploaded image contains a face
         
+        with open('pesonal_user_data.json', 'r') as outfile:
+            customer_data = json.load(outfile)
+            
+        customer_data["aadhar_url"] = upload_url
+        
+        with open('pesonal_user_data.json', 'w') as outfile:
+            json.dump(customer_data, outfile)
+            
         return jsonify({"customer_data": customer_data_response, "upload_url": upload_url, "response": response})
     
 @app.route('/ocr_back', methods=['POST'])
@@ -116,10 +124,28 @@ def post_image():
             
         customer_data["image_url"] = response
         
-        with open('personal_user_data.json', 'w') as outfile:
+        with open('pesonal_user_data.json', 'w') as outfile:
             json.dump(customer_data, outfile)
             
         return jsonify({"image_url": response})
+    
+    
+@app.route('/get_signature', methods=['POST'])
+def post_sign():
+    if request.method == 'POST':
+        data = request.get_json()
+        
+        response = boto_functions.upload_user_sign(data['image'].split(",")[1])
+        
+        with open('pesonal_user_data.json', 'r') as outfile:
+            customer_data = json.load(outfile)
+            
+        customer_data["signature_url"] = response
+        
+        with open('pesonal_user_data.json', 'w') as outfile:
+            json.dump(customer_data, outfile)
+            
+        return jsonify({"signature_url": response})
         
                 
 if __name__ == '__main__':
