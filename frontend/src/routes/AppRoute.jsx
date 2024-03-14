@@ -26,6 +26,7 @@ const AppRoute = () => {
       <Route path="/doc-scanner" element={<DocumentScanner />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/personal-details" element={<PersonalDetails />} />
+      <Route path="/kyc" element={<Kyc />} />
 
       <Route path="*" element={<NoRouteFound />} />
     </Routes>
