@@ -7,6 +7,8 @@ const UserDetails = {
   PanNo: "ABCDE1234F",
   Occupation: "Student",
   SalaryRange: "0-2L",
+  adhaarCardFile: "adhaar-card.jpg",
+  panCardFile: "pan-card.jpg",
 };
 
 function kyc() {
@@ -62,6 +64,32 @@ function kyc() {
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {UserDetails.SalaryRange}
+              </dd>
+            </div>
+            <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">
+                Adhaar Card File
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <a
+                  className="bg-gray-300 p-1 rounded-md mt-1"
+                  href={UserDetails.adhaarCardFile}
+                >
+                  View
+                </a>
+              </dd>
+            </div>
+            <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500 ">
+                Pan Card File
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ">
+                <a
+                  className="bg-gray-300 p-1 rounded-md mt-1"
+                  href={UserDetails.panCardFile}
+                >
+                  View
+                </a>
               </dd>
             </div>
           </dl>
