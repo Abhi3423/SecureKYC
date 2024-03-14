@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import ReactAudioPlayer from 'react-audio-player';
+import { DataContext } from "../../shared/containers/provider";
 
-const Step1 = () => {
+export const Step1 = () => {
+  let { startContent,speechContent, setspeechContent, setstep } = useContext(DataContext);
+  const handleAudioEnded = () => {
+    setTimeout(() => {
+      setstep(2);
+    }, 5000);
+  };
   return (
     <div>
       <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-2">
@@ -9,47 +17,72 @@ const Step1 = () => {
           In the next steps, we'll tell you what you need to have with you in
           order to finish the eKYC process easily.
         </p>
+        <ReactAudioPlayer
+          id="audio"
+          src={Object.values(speechContent)[0]}
+          autoPlay={true}
+          onEnded={handleAudioEnded}
+        />
       </div>
     </div>
   );
 };
 
-const Step2 = () => {
+export const Step2 = () => {
+  let { startContent,speechContent, setspeechContent, setstep } = useContext(DataContext);
+  const handleAudioEnded = () => {
+    setTimeout(() => {
+      setstep(3);
+    }, 5000);
+  };
   return (
     <div>
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
-        <div className="mx-auto ">
+        <div className="flex flex-col md:flex-row gap-4 mx-auto ">
           <img src="/adhaar.png" alt="adhaar card logo" className="w-40 h-40" />
-        </div>
-      </div>
-      <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-2">
-        <p className="p-4">
-          Please keep your <strong>Adhaar Card</strong> ready for further
-          process
-        </p>
-      </div>
-    </div>
-  );
-};
-
-const Step3 = () => {
-  return (
-    <div>
-      <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
-        <div className="mx-auto ">
           <img src="/pancard.png" alt="Pan card logo" className="w-40 h-40" />
         </div>
       </div>
       <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-2">
         <p className="p-4">
-          Please keep your <strong>Pan Card</strong> ready for further process
+          Please keep your <strong>Adhaar Card OR Pan card</strong> ready for further
+          process
         </p>
+        <ReactAudioPlayer
+          id="audio"
+          src={Object.values(speechContent)[1]}
+          autoPlay={true}
+          onEnded={handleAudioEnded}
+        />
       </div>
     </div>
   );
 };
 
-const Step4 = () => {
+// export const Step3 = () => {
+//   return (
+//     <div>
+//       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
+//         <div className="mx-auto ">
+//           <img src="/pancard.png" alt="Pan card logo" className="w-40 h-40" />
+//         </div>
+//       </div>
+//       <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-2">
+//         <p className="p-4">
+//           Please keep your <strong>Pan Card</strong> ready for further process
+//         </p>
+//       </div>
+//     </div>
+//   );
+// };
+
+export const Step3 = () => {
+  let { startContent,speechContent, setspeechContent, setstep } = useContext(DataContext);
+  const handleAudioEnded = () => {
+    setTimeout(() => {
+      setstep(4);
+    }, 5000);
+  };
   return (
     <div>
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
@@ -62,12 +95,18 @@ const Step4 = () => {
           Please keep your <strong>Signature</strong> on a piece of paper ready
           for further process
         </p>
+        <ReactAudioPlayer
+          id="audio"
+          src={Object.values(speechContent)[2]}
+          autoPlay={true}
+          onEnded={handleAudioEnded}
+        />
       </div>
     </div>
   );
 };
 
-const Step5 = () => {
+export const Step5 = () => {
   return (
     <div>
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
@@ -105,7 +144,7 @@ const Onboarding = () => {
       case 3:
         return <Step3 />;
       case 4:
-        return <Step4 />;
+        return <Step3 />;
       case 5:
         return <Step5 />;
       default:

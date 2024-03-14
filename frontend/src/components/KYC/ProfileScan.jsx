@@ -1,12 +1,16 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import "@tensorflow/tfjs-backend-webgl";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
+import { DataContext } from "../../shared/containers/provider";
+import ReactAudioPlayer from 'react-audio-player';
 
 const ProfileScanner = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [imageData, setImageData] = useState(null);
+
+  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
 
   const runFaceMesh = async () => {
     const model = facemesh.SupportedModels.MediaPipeFaceMesh;
@@ -50,6 +54,12 @@ const ProfileScanner = () => {
     }
   };
 
+  const handlePageEnded = () => {
+    setTimeout(() => {
+      setstep(5);
+    }, 3000);
+  };
+
   useEffect(() => {
     runFaceMesh();
   }, []);
@@ -67,13 +77,28 @@ const ProfileScanner = () => {
           <canvas ref={canvasRef} className="hidden" />
         </div>
       </div>
-      <button className="bg-gray-300 p-3 m-2 border-black rounded-md hover:bg-gray-400">
-        Show Image in console
-      </button>
-      {/* this paragraph will be dynamic to render the instructions for the document  */}
-      <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-3">
-        Please make sure your face is clearly visible and in proper lighting.
-      </div>
+      <ReactAudioPlayer
+        id="audio"
+        src={Object.values(speechContent)[3]}
+        autoPlay={true}
+      />
+      {
+        imageData &&
+        <div>
+          <button onClick={() => handlePageEnded()} className="bg-green-500 p-3 m-2 border-black rounded-md text-white">
+            Next
+          </button>
+          <ReactAudioPlayer
+            id="audio"
+            src={Object.values(speechContent)[4]}
+            autoPlay={true}
+          />
+          {/* this paragraph will be dynamic to render the instructions for the document  */}
+          <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-3">
+            Please make sure your face is clearly visible and in proper lighting.
+          </div>
+        </div>
+      }
     </article>
   );
 };
