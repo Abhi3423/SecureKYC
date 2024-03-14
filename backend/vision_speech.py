@@ -1,13 +1,15 @@
 import os
+import base64
 import pandas as pd
 from google.cloud import vision
 from google_vision_ai import VisionAI
 from google_vision_ai import prepare_image_local
-from tools import extract_12_digit_numbers
+from tools import extract_12_digit_numbers, extract_names, extract_gender, extract_birth_date
 
 from google.cloud import texttospeech
 
 import boto_functions
+import json
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "./standard-chartered-417102-aceef618da22.json"
 client = vision.ImageAnnotatorClient()
@@ -21,6 +23,57 @@ client_speech = texttospeech.TextToSpeechClient()
 # texts = va.text_detection()
 # print(extract_12_digit_numbers(texts[0].description))
 
+def ocr_front(base64_image):
+    decode = open("image.jpeg", "wb")
+    decode.write(base64.b64decode(base64_image))
+    
+    image_file_path = "image.jpeg"
+    
+    image = prepare_image_local(image_file_path)
+    
+    va = VisionAI(client, image)
+    
+    texts = va.text_detection()
+    
+    with open('pesonal_user_data.json', 'r') as outfile:
+        customer_data = json.load(outfile)
+    
+    if type(extract_12_digit_numbers(texts[0].description)) == list:
+        customer_data["aadhar_number"] = extract_12_digit_numbers(texts[0].description)[0]
+    else:
+        customer_data["aadhar_number"] = extract_12_digit_numbers(texts[0].description)
+    customer_data["name"] = extract_names(texts[0].description)
+    customer_data["gender"] = extract_gender(texts[0].description)
+    customer_data["dob"] = extract_birth_date(texts[0].description)
+    
+    with open('pesonal_user_data.json', 'w') as outfile:
+        json.dump(customer_data, outfile)
+        
+    return customer_data
+        
+        
+def ocr_back(base64_image):
+    decode = open("image.jpeg", "wb")
+    decode.write(base64.b64decode(base64_image))
+    
+    image_file_path = "image.jpeg"
+    
+    image = prepare_image_local(image_file_path)
+    
+    va = VisionAI(client, image)
+    
+    texts = va.text_detection()
+    
+    with open('pesonal_user_data.json', 'r') as outfile:
+        customer_data = json.load(outfile)
+    
+    customer_data["address"] = texts[0].description
+    
+    with open('pesonal_user_data.json', 'w') as outfile:
+        json.dump(customer_data, outfile)
+        
+    return customer_data
+     
 
 def audio(key, text, language):
     

@@ -70,6 +70,33 @@ def get_start():
             data = json.load(f)  # Load the JSON data from the file
             
         return jsonify(data)  # Return the start URLs
+    
+@app.route('/ocr_front', methods=['POST'])
+def ocr_front():
+    if request.method == 'POST':
+        data = request.get_json()
         
+        response = vision_speech.ocr_front(data['image'].split(",")[1])  # Call vision_speech.ocr_front() to extract data from the front of the Aadhar card
+        
+        return jsonify(response)
+    
+@app.route('/ocr_back', methods=['POST'])
+def ocr_back():
+    if request.method == 'POST':
+        data = request.get_json()
+        
+        response = vision_speech.ocr_back(data['image'].split(",")[1])  # Call vision_speech.ocr_back() to extract data from the back of the Aadhar card
+        
+        return jsonify(response)
+    
+@app.route('/get_user_data', methods=['GET'])
+def get_data():
+    if request.method == 'GET':
+        
+        with open('pesonal_user_data.json') as f:
+            data = json.load(f)  # Load the JSON data from the file
+        
+        return jsonify(data)  # Return the extracted data
+                
 if __name__ == '__main__':
     app.run()
