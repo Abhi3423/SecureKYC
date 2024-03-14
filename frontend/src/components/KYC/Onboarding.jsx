@@ -19,7 +19,7 @@ export const Step1 = () => {
         </p>
         <ReactAudioPlayer
           id="audio"
-          src={Object.values(speechContent)[0]}
+          src={Object.values(speechContent)[1]}
           autoPlay={true}
           onEnded={handleAudioEnded}
         />
@@ -50,7 +50,7 @@ export const Step2 = () => {
         </p>
         <ReactAudioPlayer
           id="audio"
-          src={Object.values(speechContent)[1]}
+          src={Object.values(speechContent)[2]}
           autoPlay={true}
           onEnded={handleAudioEnded}
         />
@@ -97,7 +97,7 @@ export const Step3 = () => {
         </p>
         <ReactAudioPlayer
           id="audio"
-          src={Object.values(speechContent)[2]}
+          src={Object.values(speechContent)[3]}
           autoPlay={true}
           onEnded={handleAudioEnded}
         />

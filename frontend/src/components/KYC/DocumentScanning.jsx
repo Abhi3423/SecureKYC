@@ -66,7 +66,7 @@ const DocumentScanner = () => {
       </div>
       <ReactAudioPlayer
         id="audio"
-        src={Object.values(speechContent)[5]}
+        src={Object.values(speechContent)[6]}
         autoPlay={true}
         onEnded={handleStartEnded}
       />
@@ -78,7 +78,7 @@ const DocumentScanner = () => {
           </button>
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[6]}
+            src={Object.values(speechContent)[7]}
             autoPlay={true}
           />
           {/* this paragraph will be dynamic to render the instructions for the document  */}

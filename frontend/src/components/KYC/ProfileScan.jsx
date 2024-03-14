@@ -79,7 +79,7 @@ const ProfileScanner = () => {
       </div>
       <ReactAudioPlayer
         id="audio"
-        src={Object.values(speechContent)[3]}
+        src={Object.values(speechContent)[4]}
         autoPlay={true}
       />
       {
@@ -90,7 +90,7 @@ const ProfileScanner = () => {
           </button>
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[4]}
+            src={Object.values(speechContent)[5]}
             autoPlay={true}
           />
           {/* this paragraph will be dynamic to render the instructions for the document  */}

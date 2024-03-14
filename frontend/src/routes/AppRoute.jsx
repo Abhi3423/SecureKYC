@@ -31,7 +31,6 @@ const AppRoute = () => {
       <Route path="/personal-details" element={<PersonalDetails />} />
       <Route path="/kyc-process" element={<Kyc />} />
       <Route path="/verified-kyc" element={<VerifiedKyc />} />
-
       <Route path="*" element={<NoRouteFound />} />
     </Routes>
   );

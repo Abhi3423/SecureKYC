@@ -9,6 +9,9 @@ import { Step1, Step2, Step3 } from './Onboarding';
 import ProfileScanner from './ProfileScan';
 import DocumentScanner from './DocumentScanning';
 import SignatureScanner from './SignatureScan';
+import { Step1Employ } from './PersonalDetails';
+import { Step2Employ } from './PersonalDetails';
+import VerifiedKyc from '../VerifiedKyc/VerifiedKyc';
 
 function Kyc() {
   const { step, setstep, speechContent, setspeechContent, startContent, setstartContent } = useContext(DataContext);
@@ -51,7 +54,16 @@ function Kyc() {
                   step == 6 && speechContent ?
                     <SignatureScanner />
                     :
-                    <div></div>
+                    step == 7 && speechContent ?
+                      <Step1Employ />
+                      :
+                      step == 8 && speechContent ?
+                        <Step2Employ />
+                        :
+                        step == 9 && speechContent ?
+                          <VerifiedKyc />
+                          :
+                          <div></div>
       }
     </div>
   )

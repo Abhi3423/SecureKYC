@@ -43,6 +43,7 @@ const SignatureScanner = () => {
   };
 
   const handleReady = () => {
+    setready(true)
     setTimeout(() => {
       handleStartEnded();
     }, 1000);
@@ -78,7 +79,7 @@ const SignatureScanner = () => {
       </div>
       <ReactAudioPlayer
         id="audio"
-        src={Object.values(speechContent)[7]}
+        src={Object.values(speechContent)[8]}
         autoPlay={true}
       />
       {
@@ -95,7 +96,7 @@ const SignatureScanner = () => {
           </button>
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[8]}
+            src={Object.values(speechContent)[9]}
             autoPlay={true}
           />
           {/* this paragraph will be dynamic to render the instructions for the document  */}
