@@ -9,6 +9,7 @@ import ProfileScanner from "../components/KYC/ProfileScan";
 
 import Onboarding from "../components/KYC/Onboarding";
 import PersonalDetails from "../components/KYC/PersonalDetails";
+import VerifiedKyc from "../components/VerifiedKyc/VerifiedKyc";
 
 const AppRoute = () => {
   return (
@@ -28,7 +29,8 @@ const AppRoute = () => {
       <Route path="/profile-scanner" element={<ProfileScanner />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/personal-details" element={<PersonalDetails />} />
-      <Route path="/kyc" element={<Kyc />} />
+      <Route path="/kyc-process" element={<Kyc />} />
+      <Route path="/verified-kyc" element={<VerifiedKyc />} />
 
       <Route path="*" element={<NoRouteFound />} />
     </Routes>
