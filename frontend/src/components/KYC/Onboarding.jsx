@@ -3,6 +3,20 @@ import React, { useState } from "react";
 const Step1 = () => {
   return (
     <div>
+      <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-2">
+        <p className="p-4">Your eKYC process is going to start.</p>
+        <p className="p-4">
+          In the next steps, we'll tell you what you need to have with you in
+          order to finish the eKYC process easily.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const Step2 = () => {
+  return (
+    <div>
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
         <div className="mx-auto ">
           <img src="/adhaar.png" alt="adhaar card logo" className="w-40 h-40" />
@@ -18,7 +32,7 @@ const Step1 = () => {
   );
 };
 
-const Step2 = () => {
+const Step3 = () => {
   return (
     <div>
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
@@ -35,7 +49,7 @@ const Step2 = () => {
   );
 };
 
-const Step3 = () => {
+const Step4 = () => {
   return (
     <div>
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
@@ -53,11 +67,33 @@ const Step3 = () => {
   );
 };
 
-const DocumentsRequired = () => {
+const Step5 = () => {
+  return (
+    <div>
+      <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
+        <div className="mx-auto ">
+          <img
+            src="/cameraIcon.png"
+            alt="Signature logo"
+            className=" w-40 h-40"
+          />
+        </div>
+      </div>
+      <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-2">
+        <p className="p-4">
+          Make sure you are sitting in a well lit room and have a good internet
+          and your camera is working fine.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const nextStep = () => {
-    setCurrentStep((prevStep) => (prevStep < 3 ? prevStep + 1 : 1));
+    setCurrentStep((prevStep) => (prevStep < 5 ? prevStep + 1 : 1));
   };
 
   const renderStep = () => {
@@ -68,6 +104,10 @@ const DocumentsRequired = () => {
         return <Step2 />;
       case 3:
         return <Step3 />;
+      case 4:
+        return <Step4 />;
+      case 5:
+        return <Step5 />;
       default:
         return null;
     }
@@ -101,4 +141,4 @@ const DocumentsRequired = () => {
   );
 };
 
-export default DocumentsRequired;
+export default Onboarding;
