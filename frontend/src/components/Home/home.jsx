@@ -14,7 +14,7 @@ const Home = () => {
               <img
                 src="https://1000logos.net/wp-content/uploads/2021/11/Standard-Chartered-logo.png"
                 loading="lazy"
-                alt="Photo by Fakurian Design"
+                alt=" by Fakurian Design"
                 class="h-full w-full object-cover object-center sm:object-fill"
               />
             </div>

@@ -8,6 +8,7 @@ import DocumentScanner from "../components/KYC/DocumentScanning";
 import ProfileScanner from "../components/KYC/ProfileScan";
 
 import Onboarding from "../components/KYC/Onboarding";
+import PersonalDetails from "../components/KYC/PersonalDetails";
 
 const AppRoute = () => {
   return (
@@ -26,6 +27,8 @@ const AppRoute = () => {
       <Route path="/doc-scanner" element={<DocumentScanner />} />
       <Route path="/profile-scanner" element={<ProfileScanner />} />
       <Route path="/onboarding" element={<Onboarding />} />
+      <Route path="/personal-details" element={<PersonalDetails />} />
+      <Route path="/kyc" element={<Kyc />} />
 
       <Route path="*" element={<NoRouteFound />} />
     </Routes>

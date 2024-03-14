@@ -6,7 +6,7 @@ import ReactAudioPlayer from 'react-audio-player';
 
 const DialPad = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  let { startContent,speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
   const handleSubmit = (lang) => {
     axios.get(`${HOST}/get_audio/${lang}`)
       .then(response => {
@@ -74,66 +74,36 @@ const DialPad = () => {
         />
       </div>
       <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8">
-        <div className="w-1/3">
-          <button onClick={() => handleSubmit("English")} className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            1
+        <div className="w-1/3" onClick={() => handleSubmit("English")}>
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>1</p> <p className="text-sm ">English</p>
           </button>
         </div>
-        <div className="w-1/3">
-          <button onClick={() => handleSubmit("Tamil")} className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            2
+        <div className="w-1/3" onClick={() => handleSubmit("Tamil")}>
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>2</p> <p className="text-sm ">தமிழ்</p>
           </button>
         </div>
-        <div className="w-1/3">
-          <button onClick={() => handleSubmit("Telugu")} className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            3
+        <div className="w-1/3" onClick={() => handleSubmit("Telugu")}>
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>3</p> <p className="text-sm ">తెలుగు</p>
           </button>
         </div>
-        <div className="w-1/3">
-          <button onClick={() => handleSubmit("Hindi")} className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            4
+        <div className="w-1/3" onClick={() => handleSubmit("Hindi")}>
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>4</p> <p className="text-sm ">हिन्दी</p>
           </button>
         </div>
-        <div className="w-1/3">
-          <button onClick={() => handleSubmit("Bangla")} className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            5
+        <div className="w-1/3" onClick={() => handleSubmit("Bangla")}>
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>5</p> <p className="text-sm ">বাংলা</p>
           </button>
         </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            6
+        {/* <div className="w-1/3">
+          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400 ">
+            <p>6</p> <p className="text-sm ">മലയാളം</p>
           </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            7
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            8
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            9
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            *
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            0
-          </button>
-        </div>
-        <div className="w-1/3">
-          <button className="w-full h-20 text-2xl text-gray-700 font-bold rounded-xl hover:bg-gray-400">
-            #
-          </button>
-        </div>
+        </div> */}
       </div>
     </article>
   );
