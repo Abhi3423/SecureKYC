@@ -53,7 +53,7 @@ const Step3 = () => {
   );
 };
 
-const DocumentsRequired = () => {
+const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const nextStep = () => {
@@ -101,4 +101,4 @@ const DocumentsRequired = () => {
   );
 };
 
-export default DocumentsRequired;
+export default Onboarding;
