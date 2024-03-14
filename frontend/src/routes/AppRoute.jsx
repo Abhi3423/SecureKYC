@@ -6,6 +6,7 @@ import LanguageSelection from "../components/KYC/LanguageSelection";
 import DialPad from "../components/KYC/DialPad";
 import DocumentScanner from "../components/KYC/DocumentScanning";
 import DocumentsRequired from "../components/KYC/DocumentsRequired";
+import ProfileScanner from "../components/KYC/ProfileScan";
 
 const AppRoute = () => {
   return (
@@ -23,7 +24,7 @@ const AppRoute = () => {
       <Route path="/dial-pad" element={<DialPad />} />
       <Route path="/doc-scanner" element={<DocumentScanner />} />
       <Route path="/doc-required" element={<DocumentsRequired />} />
-
+      <Route path="/profile-scanner" element={<ProfileScanner />} />
       <Route path="*" element={<NoRouteFound />} />
     </Routes>
   );
