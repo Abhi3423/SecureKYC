@@ -131,7 +131,7 @@ export const Step1Employ = () => {
         </div>
       </div>
       <button
-        className="mt-3 inline-flex items-center gap-2 rounded border border-blue-500 bg-blue-500 px-8 py-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+        className="mt-3 inline-flex items-center gap-2 rounded border border-green-500 bg-green-500 px-8 py-3 text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
         onClick={() => { handleNext() }}
       >
         <span className="text-sm font-medium"> Next </span>
@@ -199,7 +199,7 @@ export const Step2Employ = () => {
         </div>
       </div>
       <button
-        className="mt-3 inline-flex items-center gap-2 rounded border border-blue-500 bg-blue-500 px-8 py-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+        className="mt-3 inline-flex items-center gap-2 rounded border border-green-500 bg-green-500 px-8 py-3 text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
         onClick={() => { handleNext() }}
       >
         <span className="text-sm font-medium"> Next </span>

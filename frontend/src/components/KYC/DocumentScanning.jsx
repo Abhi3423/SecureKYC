@@ -2,13 +2,15 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import { DataContext } from "../../shared/containers/provider";
 import ReactAudioPlayer from 'react-audio-player';
+import axios from "axios";
+import { HOST } from "../../shared/const/const";
 
 const DocumentScanner = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   // const [isDocumentDetected, setIsDocumentDetected] = useState(false);
   const [imageData, setImageData] = useState(null);
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { startContent, speechContent, setspeechContent, setstep, verified, setVerified } = useContext(DataContext);
 
   // useEffect(() => {
   //   // Captures after 5 seconds
@@ -46,9 +48,18 @@ const DocumentScanner = () => {
   };
 
   const handlePageEnded = () => {
-    setTimeout(() => {
-      setstep(6);
-    }, 3000);
+    console.log(imageData)
+    axios.post(`${HOST}/ocr_front`, {"image":imageData})
+      .then(response => {
+        console.log(response.data);
+        setVerified(response.data.response);
+        setTimeout(() => {
+          setstep(6);
+        }, 3000);
+      })
+      .catch(error => {
+        console.error('Error uploading image:', error);
+      });
   };
 
   return (

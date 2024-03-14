@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import { DataContext } from "../../shared/containers/provider";
 import ReactAudioPlayer from 'react-audio-player';
+import axios from "axios";
+import { HOST } from "../../shared/const/const";
 
 const SignatureScanner = () => {
   const webcamRef = useRef(null);
@@ -56,9 +58,17 @@ const SignatureScanner = () => {
   };
 
   const handlePageEnded = () => {
-    setTimeout(() => {
-      setstep(7);
-    }, 3000);
+    console.log(imageData)
+    axios.post(`${HOST}/get_signature`, {"image":imageData})
+      .then(response => {
+        console.log(response.data);
+        setTimeout(() => {
+          setstep(7);
+        }, 3000);
+      })
+      .catch(error => {
+        console.error('Error uploading image:', error);
+      });
   };
 
   return (

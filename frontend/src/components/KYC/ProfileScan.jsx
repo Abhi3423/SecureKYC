@@ -4,6 +4,8 @@ import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
 import { DataContext } from "../../shared/containers/provider";
 import ReactAudioPlayer from 'react-audio-player';
+import axios from "axios";
+import { HOST } from "../../shared/const/const";
 
 const ProfileScanner = () => {
   const webcamRef = useRef(null);
@@ -55,9 +57,17 @@ const ProfileScanner = () => {
   };
 
   const handlePageEnded = () => {
-    setTimeout(() => {
-      setstep(5);
-    }, 3000);
+    console.log(imageData)
+    axios.post(`${HOST}/post_user_image`, {"image":imageData})
+      .then(response => {
+        console.log(response.data);
+        setTimeout(() => {
+          setstep(5);
+        }, 3000);
+      })
+      .catch(error => {
+        console.error('Error uploading image:', error);
+      });
   };
 
   useEffect(() => {
