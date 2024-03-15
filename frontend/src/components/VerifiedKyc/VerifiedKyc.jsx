@@ -111,8 +111,8 @@ function VerifiedKyc() {
               </div>
 
               <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
-                <dl className="sm:divide-y sm:divide-gray-200">
-                  <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dl className="divide-y divide-gray-200">
+                  <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
                       Full name
                     </dt>
@@ -120,13 +120,13 @@ function VerifiedKyc() {
                       {data.name}
                     </dd>
                   </div>
-                  <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">DOB</dt>
                     <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                       {data.dob}
                     </dd>
                   </div>
-                  <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
                       Adhaar No
                     </dt>
@@ -134,19 +134,19 @@ function VerifiedKyc() {
                       {data.aadhar_number}
                     </dd>
                   </div>
-                  {/* <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  {/* <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">Pan Card No</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                             {UserDetails.PanNo}
                                         </dd>
                                     </div> */}
-                  {/* <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  {/* <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">Occupation</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                             {UserDetails.Occupation}
                                         </dd>
                                     </div> */}
-                  {/* <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  {/* <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">
                                             Salary Range
                                         </dt>
@@ -155,7 +155,7 @@ function VerifiedKyc() {
                                         </dd>
                                     </div> */}
 
-                  <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
                       Signature File
                     </dt>
