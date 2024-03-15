@@ -76,10 +76,15 @@ function VerifiedKyc() {
               </div>
             </div>
             <div className="bg-white overflow-hidden shadow rounded-lg border mt-2">
-              <div className="px-4 py-5 sm:px-6">
+              <div className="px-4 py-5 sm:px-6 flex space-x-1">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  User Details
+                  Verified User Details
                 </h3>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/2048px-Twitter_Verified_Badge.svg.png"
+                  className="w-6 h-6"
+                  alt="verified icon"
+                ></img>
               </div>
               <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl className="sm:divide-y sm:divide-gray-200">
