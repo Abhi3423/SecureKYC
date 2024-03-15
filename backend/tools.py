@@ -41,3 +41,37 @@ def extract_birth_date(input_string):
     
     # Return the match if found, otherwise return None
     return match.group(1) if match else None
+
+
+def extract_pan_string(text):
+
+    # Regular expression pattern to match the desired format
+    pattern = r'\b[A-Z]{5}\d{4}[A-Z]\b'
+
+    # Find all occurrences of the pattern in the text
+    matches = re.findall(pattern, text)
+
+    return matches
+
+def extract_fathers_name(text):
+    # Find the line containing "Father's Name"
+    father_line_index = text.find("Father's Name")
+    if father_line_index == -1:
+        return "Father's Name not found"
+
+    # Get the substring following "Father's Name"
+    substring = text[father_line_index:]
+    
+    # Split the substring by newline character to get lines
+    lines = substring.split('\n')
+
+    # Extract the father's name
+    for line in lines:
+        if "Father's Name" in line:
+            # Assuming the father's name follows the label
+            father_name = line.split("/")[-1].strip()
+            return father_name
+
+    return "Father's Name not found"
+
+

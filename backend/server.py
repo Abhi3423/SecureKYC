@@ -4,6 +4,7 @@ import json
 import vision_speech
 import boto_functions
 import recognise
+import tools
 
 app = Flask(__name__)
 CORS(app)
@@ -154,6 +155,18 @@ def pan():
         
         ocr_data = vision_speech.pan_ocr(data['image'].split(",")[1])   
         response = boto_functions.upload_pan_image(data['image'].split(",")[1])
+        
+        with open('pesonal_user_data.json', 'r') as outfile:
+            customer_data = json.load(outfile)
+            
+        customer_data["pan_url"] = response
+        customer_data["pan_no"] = tools.extract_pan_string(ocr_data)[0]
+        customer_data["father_name"] = tools.extract_fathers_name(ocr_data)
+        customer_data["pan_dob"] = tools.extract_birth_date(ocr_data)
+        customer_data["pan_name"] = tools.extract_names(ocr_data)
+        
+        with open('pesonal_user_data.json', 'w') as outfile:
+            json.dump(customer_data, outfile)
         
         return jsonify({"response_url": response, "ocr_data": ocr_data})
         
