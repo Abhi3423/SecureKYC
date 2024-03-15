@@ -65,9 +65,8 @@ function VerifiedKyc() {
       <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
         {verified && data && (
           <>
-            <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
+            <div className="rounded-lg border border-blue-500 p-4 flex items-center justify-between ">
               <div className="mx-auto ">
-                {/* render user image here later */}
                 <img
                   src="/adhaar.png"
                   alt="adhaar card"
@@ -76,16 +75,41 @@ function VerifiedKyc() {
               </div>
             </div>
             <div className="bg-white overflow-hidden shadow rounded-lg border mt-2">
-              <div className="px-4 py-5 sm:px-6 flex space-x-1">
+              <div className="px-4 py-5 sm:px-6 flex space-x-1 border-b">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Verified User Details
+                  Verifier User Details
                 </h3>
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/2048px-Twitter_Verified_Badge.svg.png"
                   className="w-6 h-6"
                   alt="verified icon"
-                ></img>
+                />
               </div>
+              <div className="px-4 py-5 sm:px-6 flex space-x-1 items-center justify-between">
+                <div className="items-center justify-between flex-col space-y-1">
+                  <p>Adhaar Card</p>
+                  <div className="flex justify-center">
+                    <a
+                      className="bg-gray-600 text-white p-1 rounded-full mt-1 text-sm"
+                      href={`"${data.adhaar_url.replace(/"/g, "")}"`}
+                    >
+                      View
+                    </a>
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <p>Pand Card</p>
+                  <div className="flex justify-center">
+                    <a
+                      className="bg-gray-600 text-white p-1 rounded-full mt-1 text-sm"
+                      href={UserDetails.panCardFile}
+                    >
+                      View
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl className="sm:divide-y sm:divide-gray-200">
                   <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -130,19 +154,7 @@ function VerifiedKyc() {
                                             {UserDetails.SalaryRange}
                                         </dd>
                                     </div> */}
-                  <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt className="text-sm font-medium text-gray-500">
-                      Adhaar Card File
-                    </dt>
-                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      <a
-                        className="bg-gray-300 p-1 rounded-md mt-1"
-                        href={`"${data.adhaar_url.replace(/"/g, "")}"`}
-                      >
-                        View
-                      </a>
-                    </dd>
-                  </div>
+
                   <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
                       Signature File
@@ -156,19 +168,7 @@ function VerifiedKyc() {
                       </a>
                     </dd>
                   </div>
-                  {/* <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt className="text-sm font-medium text-gray-500 ">
-                                            Pan Card File
-                                        </dt>
-                                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 ">
-                                            <a
-                                                className="bg-gray-300 p-1 rounded-md mt-1"
-                                                href={UserDetails.panCardFile}
-                                            >
-                                                View
-                                            </a>
-                                        </dd>
-                                    </div> */}
+
                   <ReactAudioPlayer
                     id="audio"
                     src={Object.values(speechContent)[11]}
@@ -178,27 +178,25 @@ function VerifiedKyc() {
               </div>
             </div>
 
-            <button
-              onClick={() => handleRegister()}
-              className="mt-3 inline-flex items-center gap-2 rounded border border-green-500 bg-green-500 px-8 py-3 text-white hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
-            >
-              <span className="text-sm font-medium"> Register </span>
-
-              <svg
-                className="size-5 rtl:rotate-180"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </button>
+            <div className="flex justify-center">
+              <button className="mt-3 inline-flex items-center gap-2 rounded border border-gray-500 bg-gray-500 px-8 py-3 text-white hover:bg-transparent hover:text-gray-600 focus:outline-none focus:ring active:text-gray-500">
+                <span className="text-sm font-medium"> Finish </span>
+                <svg
+                  className="size-5 rtl:rotate-180"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </button>
+            </div>
           </>
         )}
         {!verified && (
