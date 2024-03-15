@@ -47,7 +47,7 @@ function VerifiedKyc() {
         setTimeout(() => {
             setregister(false);
             navigate("/");
-        }, 4000);
+        }, 8000);
     }
 
     return (
@@ -59,7 +59,7 @@ function VerifiedKyc() {
                         <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between ">
                             <div className="mx-auto ">
                                 {/* render user image here later */}
-                                <img src="data.adhaar_url" alt="adhaar card logo" className="w-40 h-40" />
+                                <img src="/adhaar.png" alt="adhaar card" className="w-40 h-40" />
                             </div>
                         </div>
                         <div className="bg-white overflow-hidden shadow rounded-lg border mt-2">
@@ -115,7 +115,7 @@ function VerifiedKyc() {
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                             <a
                                                 className="bg-gray-300 p-1 rounded-md mt-1"
-                                                href={data.adhaar_url}
+                                                href={`"${data.adhaar_url.replace(/"/g, '')}"`}
                                             >
                                                 View
                                             </a>
@@ -128,7 +128,7 @@ function VerifiedKyc() {
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                             <a
                                                 className="bg-gray-300 p-1 rounded-md mt-1"
-                                                href={data.signature_url}
+                                                href={`"${data.signature_url.replace(/"/g, '')}"`}
                                             >
                                                 View
                                             </a>
@@ -147,6 +147,11 @@ function VerifiedKyc() {
                                             </a>
                                         </dd>
                                     </div> */}
+                                    <ReactAudioPlayer
+                                        id="audio"
+                                        src={Object.values(speechContent)[11]}
+                                        autoPlay={true}
+                                    />
                                 </dl>
                             </div>
                         </div>
@@ -202,6 +207,17 @@ function VerifiedKyc() {
                         <SuccessModal successState={register}>
                             <div>
                                 <img src="/verified.png" alt="adhaar card logo" className="w-40 h-40" />
+                                <ReactAudioPlayer
+                                    id="audio"
+                                    src={Object.values(speechContent)[12]}
+                                    autoPlay={true}
+                                    onEnded={handleRegister}
+                                />
+                                <div className='flex flex-col gap-4 py-3'>
+                                    <a href='https://docs.google.com/forms/d/e/1FAIpQLSdA_yLEvDYZEVMJXFuZnm1EZ7EPn_Ja0CUft2XeJEViZibQ6w/viewform?usp=sf_link'>
+                                        <div className='underline underline-offset-2'>Survery Form</div>
+                                    </a>
+                                </div>
                             </div>
                         </SuccessModal>
                     </>
