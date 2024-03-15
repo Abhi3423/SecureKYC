@@ -146,6 +146,16 @@ def post_sign():
             json.dump(customer_data, outfile)
             
         return jsonify({"signature_url": response})
+    
+@app.route('/get_pan_data', methods=['Post'])
+def pan():
+    if request.method == 'POST':
+        data = request.get_json()
+        
+        ocr_data = vision_speech.pan_ocr(data['image'].split(",")[1])   
+        response = recognise.pan(data['image'].split(",")[1])
+        
+        return jsonify({"response_url": response, "ocr_data": ocr_data})
         
                 
 if __name__ == '__main__':

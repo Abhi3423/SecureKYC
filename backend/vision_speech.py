@@ -125,4 +125,18 @@ def audio(key, text, language):
     audio_url = boto_functions.audio_upload(key, language)
     
     return audio_url
+
+def pan_ocr(base64_image):
+    decode = open("image_pan.jpeg", "wb")
+    decode.write(base64.b64decode(base64_image))
+    
+    image_file_path = "image_pan.jpeg"
+    
+    image = prepare_image_local(image_file_path)
+    
+    va = VisionAI(client, image)
+    
+    texts = va.text_detection()
+      
+    return texts[0].description
     
