@@ -4,9 +4,10 @@
 <h3>Online Video KYC</h3>
 Currently Know Your Customer (KYC) is largely an offline and manual process OR non-interactive online process. Create an online interactive process to do video KYC which is intuitive and self-sufficient. KYC should capture the user’s live photograph and their basic details like name, DOB, address, pan card / Aadhaar, signature, income range, type of employment in a conversational manner. This tool should be highly inclusive and should have high reach across languages and generations irrespective of financial and education gap. 
 
+
 <h2>Video Demonstration</h2>
 
-https://github.com/Abhi3423/SecureKYC/assets/91749681/09e0a928-6782-4765-99c0-3436214a66f5
+https://github.com/Abhi3423/SecureKYC/assets/91872357/08d000c2-52d3-432d-ac4b-641a587674b4
 
 
 <h2>Our Aim 🎯</h2>
