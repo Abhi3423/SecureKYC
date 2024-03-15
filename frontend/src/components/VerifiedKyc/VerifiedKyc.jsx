@@ -61,7 +61,7 @@ function VerifiedKyc() {
   };
 
   return (
-    <div>
+    <div className="bg-[url('https://logowik.com/content/uploads/images/standard-chartered-bank-new-20211713.jpg')] bg-center bg-contain">
       <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
         {verified && data && (
           <>
