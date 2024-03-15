@@ -5,19 +5,16 @@ import ReactAudioPlayer from 'react-audio-player';
 import axios from "axios";
 import { HOST } from "../../shared/const/const";
 
-const SignatureScanner = () => {
+const PanScanning = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  const [ready, setready] = useState(false)
-  //   const [isDocumentDetected, setIsDocumentDetected] = useState(false);
+  // const [isDocumentDetected, setIsDocumentDetected] = useState(false);
   const [imageData, setImageData] = useState(null);
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { startContent, speechContent, setspeechContent, setstep, verified, setVerified } = useContext(DataContext);
 
   // useEffect(() => {
   //   // Captures after 5 seconds
-  //   setTimeout(() => {
-  //     captureScreenshot();
-  //   }, 10000);
+
   // }, []);
 
   const captureScreenshot = () => {
@@ -44,13 +41,6 @@ const SignatureScanner = () => {
     }
   };
 
-  const handleReady = () => {
-    setready(true)
-    setTimeout(() => {
-      handleStartEnded();
-    }, 1000);
-  };
-
   const handleStartEnded = () => {
     setTimeout(() => {
       captureScreenshot();
@@ -59,11 +49,11 @@ const SignatureScanner = () => {
 
   const handlePageEnded = () => {
     console.log(imageData)
-    axios.post(`${HOST}/get_signature`, { "image": imageData })
+    axios.post(`${HOST}/get_pan_data`, { "image": imageData })
       .then(response => {
         console.log(response.data);
         setTimeout(() => {
-          setstep(9);
+          setstep(6);
         }, 3000);
       })
       .catch(error => {
@@ -74,38 +64,30 @@ const SignatureScanner = () => {
   const handleRetake = () => {
     setTimeout(() => {
       setImageData(null);
-      setstep(8);
+      setstep(5);
     }, 1500);
   };
 
   return (
     <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
-        {
-          ready &&
-          <div>
-            <Webcam ref={webcamRef} className={imageData ? "hidden" : ""} />
-            <img
-              src={`${imageData}`}
-              className={!imageData ? "hidden" : ""}
-              alt="Captured Profile"
-            />
-            <canvas ref={canvasRef} className="hidden" />
-          </div>
-        }
-      </div>
-      {
-        !ready &&
-        <>
-          <button onClick={() => handleReady()} className="bg-green-500 p-3 m-2 border-black rounded-md text-white">
-            Ready
-          </button>
-          <ReactAudioPlayer
-            id="audio"
-            src={Object.values(speechContent)[12]}
-            autoPlay={true}
+        <div>
+          {!imageData && <Webcam ref={webcamRef} />}
+          <img
+            src={`${imageData}`}
+            className={!imageData ? "hidden" : ""}
+            alt="Captured Profile"
           />
-        </>
+          <canvas ref={canvasRef} className="hidden" />
+        </div>
+      </div>
+      {!imageData &&
+        <ReactAudioPlayer
+          id="audio"
+          src={Object.values(speechContent)[6]}
+          autoPlay={true}
+          onEnded={handleStartEnded}
+        />
       }
       {
         imageData &&
@@ -115,7 +97,7 @@ const SignatureScanner = () => {
           </button>
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[13]}
+            src={Object.values(speechContent)[7]}
             autoPlay={true}
           />
           <button onClick={() => handleRetake()} className="bg-red-500 p-3 m-2 border-black rounded-md text-white">
@@ -127,4 +109,4 @@ const SignatureScanner = () => {
   );
 };
 
-export default SignatureScanner;
+export default PanScanning;

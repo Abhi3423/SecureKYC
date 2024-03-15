@@ -81,14 +81,14 @@ const SalaryRange = [
 
 export const Step1Employ = () => {
   const [selectedEmployability, setSelectedEmployability] = useState("");
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let {speechContent, setstep } = useContext(DataContext);
   const handleEmployabilityChange = (event) => {
     setSelectedEmployability(event.target.value);
   };
 
   const handleNext = () => {
     setTimeout(() => {
-      setstep(8);
+      setstep(10);
     }, 2000);
   }
 
@@ -125,7 +125,7 @@ export const Step1Employ = () => {
           </fieldset>
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[10]}
+            src={Object.values(speechContent)[14]}
             autoPlay={true}
           />
         </div>
@@ -157,14 +157,14 @@ export const Step1Employ = () => {
 
 export const Step2Employ = () => {
   const [selectedSalary, setSelectedSalary] = useState("");
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { setstep } = useContext(DataContext);
   const handleSalaryChange = (event) => {
     setSelectedSalary(event.target.value);
   };
 
   const handleNext = () => {
     setTimeout(() => {
-      setstep(9);
+      setstep(11);
     }, 2000);
   }
   return (

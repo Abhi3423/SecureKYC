@@ -49,17 +49,24 @@ const DocumentScanner = () => {
 
   const handlePageEnded = () => {
     console.log(imageData)
-    axios.post(`${HOST}/ocr_front`, {"image":imageData})
+    axios.post(`${HOST}/ocr_front`, { "image": imageData })
       .then(response => {
         console.log(response.data);
         setVerified(response.data.response);
         setTimeout(() => {
-          setstep(6);
+          setstep(7);
         }, 3000);
       })
       .catch(error => {
         console.error('Error uploading image:', error);
       });
+  };
+
+  const handleRetake = () => {
+    setTimeout(() => {
+      setImageData(null);
+      setstep(6);
+    }, 1500);
   };
 
   return (
@@ -75,12 +82,14 @@ const DocumentScanner = () => {
           <canvas ref={canvasRef} className="hidden" />
         </div>
       </div>
-      <ReactAudioPlayer
-        id="audio"
-        src={Object.values(speechContent)[6]}
-        autoPlay={true}
-        onEnded={handleStartEnded}
-      />
+      {!imageData &&
+        <ReactAudioPlayer
+          id="audio"
+          src={Object.values(speechContent)[8]}
+          autoPlay={true}
+          onEnded={handleStartEnded}
+        />
+      }
       {
         imageData &&
         <div>
@@ -89,14 +98,12 @@ const DocumentScanner = () => {
           </button>
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[7]}
+            src={Object.values(speechContent)[9]}
             autoPlay={true}
           />
-          {/* this paragraph will be dynamic to render the instructions for the document  */}
-          <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-3">
-            Please show your Adhaar card to the camera. Make sure that the card is
-            properly visible and the details are clear.
-          </div>
+          <button onClick={() => handleRetake()} className="bg-red-500 p-3 m-2 border-black rounded-md text-white">
+            Retake
+          </button>
         </div>
       }
     </article>

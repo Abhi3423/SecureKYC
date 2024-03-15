@@ -12,6 +12,8 @@ import SignatureScanner from './SignatureScan';
 import { Step1Employ } from './PersonalDetails';
 import { Step2Employ } from './PersonalDetails';
 import VerifiedKyc from '../VerifiedKyc/VerifiedKyc';
+import AadharBack from './AadharBack';
+import PanScanning from './PanScanning';
 
 function Kyc() {
   const { step, setstep, speechContent, setspeechContent, startContent, setstartContent } = useContext(DataContext);
@@ -49,21 +51,27 @@ function Kyc() {
                 <ProfileScanner />
                 :
                 step == 5 && speechContent ?
-                  <DocumentScanner />
+                  <PanScanning />
                   :
                   step == 6 && speechContent ?
-                    <SignatureScanner />
+                    <DocumentScanner />
                     :
                     step == 7 && speechContent ?
-                      <Step1Employ />
+                      <AadharBack />
                       :
                       step == 8 && speechContent ?
-                        <Step2Employ />
+                        <SignatureScanner />
                         :
                         step == 9 && speechContent ?
-                          <VerifiedKyc />
+                          <Step1Employ />
                           :
-                          <div></div>
+                          step == 10 && speechContent ?
+                            <Step2Employ />
+                            :
+                            step == 11 && speechContent ?
+                              <VerifiedKyc />
+                              :
+                              <div></div>
       }
     </div>
   )

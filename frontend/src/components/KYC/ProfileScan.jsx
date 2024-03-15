@@ -12,7 +12,7 @@ const ProfileScanner = () => {
   const canvasRef = useRef(null);
   const [imageData, setImageData] = useState(null);
 
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { speechContent, setstep, step } = useContext(DataContext);
 
   const runFaceMesh = async () => {
     const model = facemesh.SupportedModels.MediaPipeFaceMesh;
@@ -58,7 +58,7 @@ const ProfileScanner = () => {
 
   const handlePageEnded = () => {
     console.log(imageData)
-    axios.post(`${HOST}/post_user_image`, {"image":imageData})
+    axios.post(`${HOST}/post_user_image`, { "image": imageData })
       .then(response => {
         console.log(response.data);
         setTimeout(() => {
@@ -70,28 +70,46 @@ const ProfileScanner = () => {
       });
   };
 
+  const handleRetake = () => {
+    console.log(imageData)
+    setTimeout(() => {
+      setImageData(null);
+      setstep(4);
+    }, 1500);
+  };
+
+
   useEffect(() => {
     runFaceMesh();
+    console.log('call run facemesh')
   }, []);
+
 
   return (
     <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
         <div>
-          {!imageData && <Webcam ref={webcamRef} />}
+          {!imageData && <Webcam onLoadStart={() => runFaceMesh()} ref={webcamRef} />}
           <img
             src={`${imageData}`}
             className={!imageData ? "hidden" : ""}
             alt="Captured Profile"
           />
           <canvas ref={canvasRef} className="hidden" />
+          {!imageData &&
+            <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-3">
+              Please make sure your face is clearly visible and in proper lighting.
+            </div>
+          }
         </div>
       </div>
-      <ReactAudioPlayer
-        id="audio"
-        src={Object.values(speechContent)[4]}
-        autoPlay={true}
-      />
+      {!imageData &&
+        <ReactAudioPlayer
+          id="audio"
+          src={Object.values(speechContent)[4]}
+          autoPlay={true}
+        />
+      }
       {
         imageData &&
         <div>
@@ -103,10 +121,14 @@ const ProfileScanner = () => {
             src={Object.values(speechContent)[5]}
             autoPlay={true}
           />
-          {/* this paragraph will be dynamic to render the instructions for the document  */}
-          <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-3">
-            Please make sure your face is clearly visible and in proper lighting.
-          </div>
+          <button onClick={() => handleRetake()} className="bg-red-500 p-3 m-2 border-black rounded-md text-white">
+            Retake
+          </button>
+          {/* <ReactAudioPlayer
+            id="audio"
+            src={Object.values(speechContent)[5]}
+            autoPlay={true}
+          /> */}
         </div>
       }
     </article>

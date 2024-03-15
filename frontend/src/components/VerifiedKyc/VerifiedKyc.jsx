@@ -115,7 +115,7 @@ function VerifiedKyc() {
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                             <a
                                                 className="bg-gray-300 p-1 rounded-md mt-1"
-                                                href={`"${data.adhaar_url.replace(/"/g, '')}"`}
+                                               
                                             >
                                                 View
                                             </a>
@@ -128,7 +128,7 @@ function VerifiedKyc() {
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                             <a
                                                 className="bg-gray-300 p-1 rounded-md mt-1"
-                                                href={`"${data.signature_url.replace(/"/g, '')}"`}
+                                               
                                             >
                                                 View
                                             </a>
@@ -149,7 +149,7 @@ function VerifiedKyc() {
                                     </div> */}
                                     <ReactAudioPlayer
                                         id="audio"
-                                        src={Object.values(speechContent)[11]}
+                                        src={Object.values(speechContent)[15]}
                                         autoPlay={true}
                                     />
                                 </dl>
@@ -209,7 +209,7 @@ function VerifiedKyc() {
                                 <img src="/verified.png" alt="adhaar card logo" className="w-40 h-40" />
                                 <ReactAudioPlayer
                                     id="audio"
-                                    src={Object.values(speechContent)[12]}
+                                    src={Object.values(speechContent)[16]}
                                     autoPlay={true}
                                     onEnded={handleRegister}
                                 />
