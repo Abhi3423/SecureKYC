@@ -1,21 +1,33 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import { DataContext } from "../../shared/containers/provider";
-import ReactAudioPlayer from 'react-audio-player';
+import ReactAudioPlayer from "react-audio-player";
 import axios from "axios";
 import { HOST } from "../../shared/const/const";
+import Countdown, { zeroPad } from "react-countdown";
 
 const DocumentScanner = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   // const [isDocumentDetected, setIsDocumentDetected] = useState(false);
   const [imageData, setImageData] = useState(null);
-  let { startContent, speechContent, setspeechContent, setstep, verified, setVerified } = useContext(DataContext);
+  const [timer, setTimer] = useState(false);
+  let { startContent,speechContent,setspeechContent,setstep,verified,setVerified,} = useContext(DataContext);
 
   // useEffect(() => {
   //   // Captures after 5 seconds
-
+  //   setTimeout(() => {
+  //     captureScreenshot();
+  //   }, 10000);
   // }, []);
+
+  const renderer = ({ hours, minutes, seconds }) => {
+    return (
+      <span>
+        {zeroPad(minutes)}:{zeroPad(seconds)}
+      </span>
+    );
+  };
 
   const captureScreenshot = () => {
     if (
@@ -42,9 +54,7 @@ const DocumentScanner = () => {
   };
 
   const handleStartEnded = () => {
-    setTimeout(() => {
-      captureScreenshot();
-    }, 10000);
+    setTimer(true)
   };
 
   const handlePageEnded = () => {
@@ -57,8 +67,8 @@ const DocumentScanner = () => {
           setstep(7);
         }, 3000);
       })
-      .catch(error => {
-        console.error('Error uploading image:', error);
+      .catch((error) => {
+        console.error("Error uploading image:", error);
       });
   };
 
@@ -79,6 +89,18 @@ const DocumentScanner = () => {
             className={!imageData ? "hidden" : ""}
             alt="Captured Profile"
           />
+          {timer && (
+            <div className="mt-3 font-semibold text-xl">
+              <Countdown
+                date={Date.now() + 10000}
+                renderer={renderer}
+                onComplete={() => {
+                  setTimer(false);
+                  captureScreenshot();
+                }}
+              />
+            </div>
+          )}
           <canvas ref={canvasRef} className="hidden" />
         </div>
       </div>
@@ -93,7 +115,10 @@ const DocumentScanner = () => {
       {
         imageData &&
         <div>
-          <button onClick={() => handlePageEnded()} className="bg-green-500 p-3 m-2 border-black rounded-md text-white">
+          <button
+            onClick={() => handlePageEnded()}
+            className="bg-green-500 p-3 m-2 border-black rounded-md text-white"
+          >
             Next
           </button>
           <ReactAudioPlayer

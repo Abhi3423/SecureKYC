@@ -1,24 +1,35 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
 import { DataContext } from "../../shared/containers/provider";
-import ReactAudioPlayer from 'react-audio-player';
+import ReactAudioPlayer from "react-audio-player";
 import axios from "axios";
 import { HOST } from "../../shared/const/const";
+import Countdown, { zeroPad } from "react-countdown";
 
 const SignatureScanner = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  const [ready, setready] = useState(false)
+  const [ready, setready] = useState(false);
   //   const [isDocumentDetected, setIsDocumentDetected] = useState(false);
   const [imageData, setImageData] = useState(null);
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { startContent, speechContent, setspeechContent, setstep } =
+    useContext(DataContext);
+  const [timer, setTimer] = useState(false);
 
   // useEffect(() => {
-  //   // Captures after 5 seconds
-  //   setTimeout(() => {
-  //     captureScreenshot();
-  //   }, 10000);
+    // Captures after 5 seconds
+    // setTimeout(() => {
+    //   captureScreenshot();
+    // }, 10000);
   // }, []);
+
+  const renderer = ({ hours, minutes, seconds }) => {
+    return (
+      <span>
+        {zeroPad(minutes)}:{zeroPad(seconds)}
+      </span>
+    );
+  };
 
   const captureScreenshot = () => {
     if (
@@ -45,16 +56,10 @@ const SignatureScanner = () => {
   };
 
   const handleReady = () => {
-    setready(true)
+    setready(true);
     setTimeout(() => {
-      handleStartEnded();
+      setTimer(true);
     }, 1000);
-  };
-
-  const handleStartEnded = () => {
-    setTimeout(() => {
-      captureScreenshot();
-    }, 10000);
   };
 
   const handlePageEnded = () => {
@@ -66,8 +71,8 @@ const SignatureScanner = () => {
           setstep(9);
         }, 3000);
       })
-      .catch(error => {
-        console.error('Error uploading image:', error);
+      .catch((error) => {
+        console.error("Error uploading image:", error);
       });
   };
 
@@ -81,8 +86,7 @@ const SignatureScanner = () => {
   return (
     <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
       <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
-        {
-          ready &&
+        {ready && (
           <div>
             <Webcam ref={webcamRef} className={imageData ? "hidden" : ""} />
             <img
@@ -90,9 +94,21 @@ const SignatureScanner = () => {
               className={!imageData ? "hidden" : ""}
               alt="Captured Profile"
             />
+            {timer && (
+              <div className="mt-3 font-semibold text-xl">
+                <Countdown
+                  date={Date.now() + 10000}
+                  renderer={renderer}
+                  onComplete={() => {
+                    setTimer(false);
+                    captureScreenshot();
+                  }}
+                />
+              </div>
+            )}
             <canvas ref={canvasRef} className="hidden" />
           </div>
-        }
+        )}
       </div>
       {
         !ready &&
@@ -110,7 +126,10 @@ const SignatureScanner = () => {
       {
         imageData &&
         <div>
-          <button onClick={() => handlePageEnded()} className="bg-green-500 p-3 m-2 border-black rounded-md text-white">
+          <button
+            onClick={() => handlePageEnded()}
+            className="bg-green-500 p-3 m-2 border-black rounded-md text-white"
+          >
             Next
           </button>
           <ReactAudioPlayer
