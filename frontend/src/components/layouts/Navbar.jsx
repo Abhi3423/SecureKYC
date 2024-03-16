@@ -6,94 +6,29 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+import ekyc from "./eKYC.png";
 
 const Navbar = () => {
   const location = useLocation();
 
   const showNavbar = location.pathname !== "/";
   return (
-    <header
-      className="bg-white"
-      style={{ display: showNavbar ? "block" : "none" }}
-    >
-      <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8 p-2 m-2">
+    <header className="" style={{ display: showNavbar ? "block" : "none" }}>
+      <div className="mx-auto rounded-b-xl flex justify-evenly h-24 max-w-screen-lg bg-[#D9D9D9] items-center gap-8 px-4 sm:px-6 lg:px-8 p-2">
         <a className="block text-teal-600" href="#">
-          <span className="sr-only">Home</span>
-          <div className="w-16 h-14">
+          <div className="">
             <Link to="/">
               <img
                 src="https://1000logos.net/wp-content/uploads/2021/11/Standard-Chartered-logo.png"
                 alt="Standard Charted Logo"
-                className=" w-16 h-14"
+                className="lg:h-20 h-12"
               />
             </Link>
           </div>
         </a>
-
-        <div className="flex flex-1 items-center justify-end md:justify-between">
-          <nav aria-label="Global" className="hidden md:block">
-            <ul className="flex items-center gap-6 text-sm">
-              <li>
-                <a
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  {" "}
-                </a>
-              </li>
-
-              <li>
-                <a
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  {" "}
-                </a>
-              </li>
-
-              <li>
-                <a
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  {" "}
-                </a>
-              </li>
-
-              <li>
-                <a
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  {" "}
-                </a>
-              </li>
-
-              <li>
-                <a
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  {" "}
-                </a>
-              </li>
-
-              <li>
-                <a
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                  href="#"
-                >
-                  {" "}
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4 w-16 h-14">
-              <img src="/kyclogo.png" alt="KYC logo" className="w-16 h-14" />
-            </div>
-          </div>
+        <div className="w-0.5 h-12 bg-gray-500"></div>
+        <div className="block text-teal-600">
+          <img src={ekyc} alt="eKYC" className="lg:h-20 h-12" />
         </div>
       </div>
     </header>

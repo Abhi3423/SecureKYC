@@ -32,7 +32,13 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+bg-logo {
+  background-image: url('https://1000logos.net/wp-content/uploads/2021/11/Standard-Chartered-logo.png');
 }
