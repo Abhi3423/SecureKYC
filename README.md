@@ -37,7 +37,6 @@ Create an intuitive and user-friendly online KYC platform with the following fea
 Technologies used in the project:
 
 *   ReactJS
-*   Django
 *   Flask
 *   TailwindCSS
 *   Google Vision
