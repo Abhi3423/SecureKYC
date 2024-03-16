@@ -12,7 +12,7 @@ export const Step1 = () => {
   };
   return (
     <div>
-      <div class="flex border border-[#0473EA] mx-28 my-12 rounded-2xl px-4 shadow-lg py-12 lg:py-24 flex-col justify-center items-center text-left">
+      <div class="flex border border-[#0473EA] mx-6 lg:mx-28 my-12 rounded-2xl px-4 shadow-lg py-12 lg:py-24 flex-col justify-center items-center text-left">
         <p className="p-4">Your eKYC process is going to start.</p>
         <p className="p-4">
           In the next steps, we'll tell you what you need to have with you in
