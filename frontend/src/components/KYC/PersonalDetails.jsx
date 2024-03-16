@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { GiFarmer, GiTeacher } from "react-icons/gi";
 import { MdEngineering } from "react-icons/md";
 import { FaUserDoctor } from "react-icons/fa6";
@@ -9,6 +9,8 @@ import { FaUserInjured } from "react-icons/fa";
 import { PiStudent } from "react-icons/pi";
 import ReactAudioPlayer from 'react-audio-player';
 import { DataContext } from "../../shared/containers/provider";
+import Loader from "../layouts/Loader";
+import SuccessModal from "../../UI/successModal";
 const EmployabilityStatus = [
   {
     id: 1,
@@ -81,14 +83,17 @@ const SalaryRange = [
 
 export const Step1Employ = () => {
   const [selectedEmployability, setSelectedEmployability] = useState("");
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { speechContent, setstep } = useContext(DataContext);
+  const [loading, setLoading] = useState(false);
   const handleEmployabilityChange = (event) => {
     setSelectedEmployability(event.target.value);
   };
 
   const handleNext = () => {
+    setLoading(true)
     setTimeout(() => {
-      setstep(8);
+      setLoading(false);
+      setstep(10);
     }, 2000);
   }
 
@@ -125,7 +130,7 @@ export const Step1Employ = () => {
           </fieldset>
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[10]}
+            src={Object.values(speechContent)[14]}
             autoPlay={true}
           />
         </div>
@@ -151,20 +156,29 @@ export const Step1Employ = () => {
           />
         </svg>
       </button>
+      {
+        loading &&
+        <SuccessModal successState={loading}>
+          <Loader />
+        </SuccessModal>
+      }
     </article>
   );
 };
 
 export const Step2Employ = () => {
   const [selectedSalary, setSelectedSalary] = useState("");
-  let { startContent, speechContent, setspeechContent, setstep } = useContext(DataContext);
+  let { setstep } = useContext(DataContext);
+  const [loading, setLoading] = useState(false);
   const handleSalaryChange = (event) => {
     setSelectedSalary(event.target.value);
   };
 
   const handleNext = () => {
+    setLoading(true)
     setTimeout(() => {
-      setstep(9);
+      setLoading(false);
+      setstep(11);
     }, 2000);
   }
   return (
@@ -219,6 +233,12 @@ export const Step2Employ = () => {
           />
         </svg>
       </button>
+      {
+          loading && 
+          <SuccessModal successState={loading}>
+            <Loader/>
+          </SuccessModal>
+        }
     </article>
   );
 };

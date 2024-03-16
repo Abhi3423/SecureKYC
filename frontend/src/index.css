@@ -15,3 +15,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+bg-logo {
+  background-image: url('https://1000logos.net/wp-content/uploads/2021/11/Standard-Chartered-logo.png');
+}
