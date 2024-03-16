@@ -3,12 +3,16 @@ import axios from "axios";
 import { HOST } from "../../shared/const/const";
 import { DataContext } from "../../shared/containers/provider";
 import ReactAudioPlayer from "react-audio-player";
+import Loader from "../layouts/Loader";
+import SuccessModal from "../../UI/successModal";
 
 const DialPad = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
   let { startContent, speechContent, setspeechContent, setstep } =
     useContext(DataContext);
   const handleSubmit = (lang) => {
+    setLoading(true)
     axios
       .get(`${HOST}/get_audio/${lang}`)
       .then((response) => {
@@ -18,6 +22,7 @@ const DialPad = () => {
         setTimeout(() => {
           setstep(1);
           console.log(speechContent);
+          setLoading(false);
         }, 4000);
       })
       .catch((error) => {
@@ -80,27 +85,27 @@ const DialPad = () => {
         </div>
         <div className="flex flex-wrap self-start rounded-xl w-full lg:w-[50%] lg:px-4 gap-y-2 mx-auto mt-8">
           <div className="w-1/3" onClick={() => handleSubmit("English")}>
-            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-white">
+            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-[#0473EA] hover:text-white">
               <p>1</p> <p className="text-sm ">English</p>
             </button>
           </div>
           <div className="w-1/3" onClick={() => handleSubmit("Tamil")}>
-            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-white">
+            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-[#0473EA] hover:text-white">
               <p>2</p> <p className="text-sm ">தமிழ்</p>
             </button>
           </div>
           <div className="w-1/3" onClick={() => handleSubmit("Telugu")}>
-            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl  text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-white">
+            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl  text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-[#0473EA] hover:text-white">
               <p>3</p> <p className="text-sm ">తెలుగు</p>
             </button>
           </div>
           <div className="w-1/3" onClick={() => handleSubmit("Hindi")}>
-            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl  text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-white">
+            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl  text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-[#0473EA] hover:text-white">
               <p>4</p> <p className="text-sm ">हिन्दी</p>
             </button>
           </div>
           <div className="w-1/3" onClick={() => handleSubmit("Bangla")}>
-            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl  text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-white">
+            <button className="py-4 w-[90%] lg:w-[80%] h-20 text-2xl  text-[#0473EA] border border-[#0473EA] font-bold rounded-lg hover:bg-[#0473EA] hover:text-white">
               <p>5</p> <p className="text-sm ">বাংলা</p>
             </button>
           </div>
@@ -110,6 +115,12 @@ const DialPad = () => {
           </button>
         </div> */}
         </div>
+        {
+          loading && 
+          <SuccessModal successState={loading}>
+            <Loader/>
+          </SuccessModal>
+        }
       </article>
     </div>
   );

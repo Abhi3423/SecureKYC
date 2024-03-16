@@ -6,6 +6,8 @@ import axios from "axios";
 import { HOST } from "../../shared/const/const";
 import Countdown, { zeroPad } from "react-countdown";
 import Contentbg from "../../UI/contentbg";
+import Loader from "../layouts/Loader";
+import SuccessModal from "../../UI/successModal";
 
 const DocumentScanner = () => {
   const webcamRef = useRef(null);
@@ -13,6 +15,7 @@ const DocumentScanner = () => {
   // const [isDocumentDetected, setIsDocumentDetected] = useState(false);
   const [imageData, setImageData] = useState(null);
   const [timer, setTimer] = useState(false);
+  const [loading, setLoading] = useState(false);
   let { startContent, speechContent, setspeechContent, setstep, verified, setVerified, } = useContext(DataContext);
 
   // useEffect(() => {
@@ -60,11 +63,13 @@ const DocumentScanner = () => {
 
   const handlePageEnded = () => {
     console.log(imageData)
+    setLoading(true)
     axios.post(`${HOST}/ocr_front`, { "image": imageData })
       .then(response => {
         console.log(response.data);
         setVerified(response.data.response);
         setTimeout(() => {
+          setLoading(false);
           setstep(7);
         }, 3000);
       })
@@ -134,6 +139,13 @@ const DocumentScanner = () => {
             Retake
           </button>
         </div>
+      }
+      {
+        loading &&
+        <SuccessModal successState={loading}>
+          <Loader />
+        </SuccessModal>
+
       }
     </article>
   );

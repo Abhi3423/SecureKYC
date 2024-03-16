@@ -6,6 +6,8 @@ import axios from "axios";
 import { HOST } from "../../shared/const/const";
 import Countdown, { zeroPad } from "react-countdown";
 import Contentbg from "../../UI/contentbg";
+import Loader from "../layouts/Loader";
+import SuccessModal from "../../UI/successModal";
 
 const SignatureScanner = () => {
   const webcamRef = useRef(null);
@@ -16,6 +18,7 @@ const SignatureScanner = () => {
   let { startContent, speechContent, setspeechContent, setstep } =
     useContext(DataContext);
   const [timer, setTimer] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   // Captures after 5 seconds
@@ -65,10 +68,12 @@ const SignatureScanner = () => {
 
   const handlePageEnded = () => {
     console.log(imageData)
+    setLoading(true)
     axios.post(`${HOST}/get_signature`, { "image": imageData })
       .then(response => {
         console.log(response.data);
         setTimeout(() => {
+          setLoading(false);
           setstep(9);
         }, 3000);
       })
@@ -146,6 +151,12 @@ const SignatureScanner = () => {
           </button>
         </div>
       }
+      {
+          loading && 
+          <SuccessModal successState={loading}>
+            <Loader/>
+          </SuccessModal>
+        }
     </article>
   );
 };

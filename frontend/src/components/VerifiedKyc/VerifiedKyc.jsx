@@ -31,7 +31,9 @@ function VerifiedKyc() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(data)
     const handleSubmit = () => {
+      console.log('hello')
       axios
         .get(`${HOST}/get_user_data`)
         .then((response) => {
@@ -40,7 +42,7 @@ function VerifiedKyc() {
           setData(response.data);
         })
         .catch((error) => {
-          console.error("Error fetching data:", error);
+          console.error("Error fetching data", error);
         });
     };
     handleSubmit();
@@ -57,27 +59,27 @@ function VerifiedKyc() {
     setTimeout(() => {
       setregister(false);
       navigate("/");
-    }, 8000);
+    }, 5000);
   };
 
   return (
     <div>
       <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
-        {verified && data && (
+        {verified && data!=null && (
           <>
             <div className="rounded-lg border border-blue-500 p-4 flex items-center justify-between ">
               <div className="mx-auto ">
                 <img
-                  src="/adhaar.png"
+                  src={`${data.aadhar_url}`}
                   alt="adhaar card"
-                  className="w-40 h-40"
+                  className="w-80 h-60"
                 />
               </div>
             </div>
             <div className="bg-white overflow-hidden shadow rounded-lg border mt-2">
               <div className="px-4 py-5 sm:px-6 flex space-x-1 border-b">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Verifier User Details
+                  Verify User Details
                 </h3>
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/2048px-Twitter_Verified_Badge.svg.png"
@@ -85,24 +87,24 @@ function VerifiedKyc() {
                   alt="verified icon"
                 />
               </div>
-              <div className="px-4 py-5 sm:px-6 flex space-x-1 items-center justify-between">
+              <div className="px-4 py-5 sm:px-6 flex space-x-1 items-center justify-center gap-10">
                 <div className="items-center justify-between flex-col space-y-1">
                   <p>Adhaar Card</p>
                   <div className="flex justify-center">
                     <a
-                      className="bg-gray-600 text-white p-1 rounded-full mt-1 text-sm"
-                      href={`"${data.adhaar_url.replace(/"/g, "")}"`}
+                      className="bg-gray-600 text-white p-1 rounded-md mt-1 text-sm"
+                      href={`${data.aadhar_url}`}
                     >
                       View
                     </a>
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <p>Pand Card</p>
+                  <p>Pan Card</p>
                   <div className="flex justify-center">
                     <a
-                      className="bg-gray-600 text-white p-1 rounded-full mt-1 text-sm"
-                      href={UserDetails.panCardFile}
+                      className="bg-gray-600 text-white p-1 rounded-md mt-1 text-sm"
+                      href={`${data.pan_url}`}
                     >
                       View
                     </a>
@@ -134,6 +136,14 @@ function VerifiedKyc() {
                       {data.aadhar_number}
                     </dd>
                   </div>
+                  <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">
+                      Pan No
+                    </dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      {data.pan_no}
+                    </dd>
+                  </div>
                   {/* <div className="py-3 sm:py-5 grid grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">Pan Card No</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -159,14 +169,14 @@ function VerifiedKyc() {
                     <dt className="text-sm font-medium text-gray-500">
                       Signature File
                     </dt>
-                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                       <a
                         className="bg-gray-300 p-1 rounded-md mt-1"
-                        href={`"${data.signature_url.replace(/"/g, "")}"`}
+                        href={`${data.signature_url}`}
                       >
                         View
                       </a>
-                    </dd>
+                    </div>
                   </div>
 
                   <ReactAudioPlayer
@@ -179,8 +189,8 @@ function VerifiedKyc() {
             </div>
 
             <div className="flex justify-center">
-              <button className="mt-3 inline-flex items-center gap-2 rounded border border-gray-500 bg-gray-500 px-8 py-3 text-white hover:bg-transparent hover:text-gray-600 focus:outline-none focus:ring active:text-gray-500">
-                <span className="text-sm font-medium"> Finish </span>
+              <button onClick={()=>{handleRegister()}} className="mt-3 inline-flex items-center gap-2 rounded border border-green-500 bg-green-500 px-8 py-3 text-white hover:bg-transparent hover:text-gray-600 focus:outline-none focus:ring active:text-gray-500">
+                <span className="text-sm font-medium"> Register </span>
                 <svg
                   className="size-5 rtl:rotate-180"
                   xmlns="http://www.w3.org/2000/svg"

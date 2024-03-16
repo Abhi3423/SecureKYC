@@ -1,18 +1,23 @@
 import React, { useState, useContext } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import { DataContext } from "../../shared/containers/provider";
+import SuccessModal from "../../UI/successModal";
+import Loader from "../layouts/Loader";
 
 export const Step1 = () => {
   let { startContent, speechContent, setspeechContent, setstep } =
     useContext(DataContext);
+  const [loading, setLoading] = useState(false);
   const handleAudioEnded = () => {
+    setLoading(true)
     setTimeout(() => {
       setstep(2);
+      setLoading(false)
     }, 5000);
   };
   return (
     <div>
-      <div class="flex border border-[#0473EA] mx-28 my-12 rounded-2xl px-4 shadow-lg py-12 lg:py-24 flex-col justify-center items-center text-left">
+      <div class="flex border border-[#0473EA] lg:mx-28 my-12 rounded-2xl px-4 shadow-lg py-12 lg:py-24 flex-col justify-center items-center text-left">
         <p className="p-4">Your eKYC process is going to start.</p>
         <p className="p-4">
           In the next steps, we'll tell you what you need to have with you in
@@ -25,6 +30,12 @@ export const Step1 = () => {
           onEnded={handleAudioEnded}
         />
       </div>
+      {
+          loading && 
+          <SuccessModal successState={loading}>
+            <Loader/>
+          </SuccessModal>
+        }
     </div>
   );
 };
@@ -32,9 +43,12 @@ export const Step1 = () => {
 export const Step2 = () => {
   let { startContent, speechContent, setspeechContent, setstep } =
     useContext(DataContext);
+    const [loading, setLoading] = useState(false);
   const handleAudioEnded = () => {
+    setLoading(true)
     setTimeout(() => {
       setstep(3);
+      setLoading(false);
     }, 5000);
   };
   return (
@@ -62,6 +76,12 @@ export const Step2 = () => {
           <img src="/icon.png" alt="Sound On" className="h-16" />
         </div>
       </div>
+      {
+          loading && 
+          <SuccessModal successState={loading}>
+            <Loader/>
+          </SuccessModal>
+        }
     </div>
   );
 };
@@ -86,9 +106,12 @@ export const Step2 = () => {
 export const Step3 = () => {
   let { startContent, speechContent, setspeechContent, setstep } =
     useContext(DataContext);
+    const [loading, setLoading] = useState(false);
   const handleAudioEnded = () => {
+    setLoading(true)
     setTimeout(() => {
       setstep(4);
+      setLoading(false);
     }, 5000);
   };
   return (
@@ -115,6 +138,12 @@ export const Step3 = () => {
           <img src="/icon.png" alt="Sound On" className="h-16" />
         </div>
       </div>
+      {
+          loading && 
+          <SuccessModal successState={loading}>
+            <Loader/>
+          </SuccessModal>
+        }
     </div>
   );
 };

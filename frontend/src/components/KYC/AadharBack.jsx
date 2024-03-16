@@ -7,6 +7,8 @@ import { HOST } from "../../shared/const/const";
 import Contentbg from "../../UI/contentbg";
 import Countdown from "react-countdown";
 import { renderer } from "../../shared/containers/render";
+import Loader from "../layouts/Loader";
+import SuccessModal from "../../UI/successModal";
 
 const AadharBack = () => {
   const webcamRef = useRef(null);
@@ -14,6 +16,7 @@ const AadharBack = () => {
   // const [isDocumentDetected, setIsDocumentDetected] = useState(false);
   const [imageData, setImageData] = useState(null);
   const [timer, setTimer] = useState(false);
+  const [loading, setLoading] = useState(false);
   let { startContent, speechContent, setspeechContent, setstep, verified, setVerified } = useContext(DataContext);
 
   // useEffect(() => {
@@ -51,10 +54,12 @@ const AadharBack = () => {
 
   const handlePageEnded = () => {
     console.log(imageData)
+    setLoading(true)
     axios.post(`${HOST}/ocr_back`, { "image": imageData })
       .then(response => {
         console.log(response.data);
         setTimeout(() => {
+          setLoading(false);
           setstep(8);
         }, 3000);
       })
@@ -81,18 +86,18 @@ const AadharBack = () => {
               className={!imageData ? "hidden" : ""}
               alt="Captured Profile"
             />
-             {timer && (
-                <div className="mt-3 font-semibold text-xl">
-                  <Countdown
-                    date={Date.now() + 10000}
-                    renderer={renderer}
-                    onComplete={() => {
-                      setTimer(false);
-                      captureScreenshot();
-                    }}
-                  />
-                </div>
-              )}
+            {timer && (
+              <div className="mt-3 font-semibold text-xl">
+                <Countdown
+                  date={Date.now() + 10000}
+                  renderer={renderer}
+                  onComplete={() => {
+                    setTimer(false);
+                    captureScreenshot();
+                  }}
+                />
+              </div>
+            )}
             <canvas ref={canvasRef} className="hidden" />
           </div>
         </div>
@@ -121,6 +126,12 @@ const AadharBack = () => {
             Retake
           </button>
         </div>
+      }
+      {
+        loading &&
+        <SuccessModal successState={loading}>
+          <Loader />
+        </SuccessModal>
       }
     </article>
   );
