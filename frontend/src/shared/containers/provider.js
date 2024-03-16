@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  let [step, setstep] = useState(0);
+  let [step, setstep] = useState(4);
   const [startContent, setstartContent] = useState([]);
   const [speechContent, setspeechContent] = useState([]);
   const [data, setData] = useState([]);

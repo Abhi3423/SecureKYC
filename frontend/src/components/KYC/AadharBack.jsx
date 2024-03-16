@@ -4,12 +4,16 @@ import { DataContext } from "../../shared/containers/provider";
 import ReactAudioPlayer from 'react-audio-player';
 import axios from "axios";
 import { HOST } from "../../shared/const/const";
+import Contentbg from "../../UI/contentbg";
+import Countdown from "react-countdown";
+import { renderer } from "../../shared/containers/render";
 
 const AadharBack = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   // const [isDocumentDetected, setIsDocumentDetected] = useState(false);
   const [imageData, setImageData] = useState(null);
+  const [timer, setTimer] = useState(false);
   let { startContent, speechContent, setspeechContent, setstep, verified, setVerified } = useContext(DataContext);
 
   // useEffect(() => {
@@ -42,9 +46,7 @@ const AadharBack = () => {
   };
 
   const handleStartEnded = () => {
-    setTimeout(() => {
-      captureScreenshot();
-    }, 10000);
+    setTimer(true);
   };
 
   const handlePageEnded = () => {
@@ -70,16 +72,31 @@ const AadharBack = () => {
 
   return (
     <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
-      <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
-        <div>
-          {!imageData && <Webcam ref={webcamRef} />}
-          <img
-            src={`${imageData}`}
-            className={!imageData ? "hidden" : ""}
-            alt="Captured Profile"
-          />
-          <canvas ref={canvasRef} className="hidden" />
+      <div className="flex flex-col lg:flex-row gap-4 justify-center">
+        <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
+          <div>
+            {!imageData && <Webcam ref={webcamRef} />}
+            <img
+              src={`${imageData}`}
+              className={!imageData ? "hidden" : ""}
+              alt="Captured Profile"
+            />
+             {timer && (
+                <div className="mt-3 font-semibold text-xl">
+                  <Countdown
+                    date={Date.now() + 10000}
+                    renderer={renderer}
+                    onComplete={() => {
+                      setTimer(false);
+                      captureScreenshot();
+                    }}
+                  />
+                </div>
+              )}
+            <canvas ref={canvasRef} className="hidden" />
+          </div>
         </div>
+        <Contentbg content={'Take your Aadhar card and show Back part in camera closely, be steady till the scanning timing completes.'} />
       </div>
       {!imageData &&
         <ReactAudioPlayer

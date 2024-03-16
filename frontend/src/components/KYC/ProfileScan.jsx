@@ -6,11 +6,16 @@ import { DataContext } from "../../shared/containers/provider";
 import ReactAudioPlayer from 'react-audio-player';
 import axios from "axios";
 import { HOST } from "../../shared/const/const";
+import Background from "../../UI/background";
+import Contentbg from "../../UI/contentbg";
+import Countdown, { zeroPad } from "react-countdown";
+import { renderer } from "../../shared/containers/render";
 
 const ProfileScanner = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [imageData, setImageData] = useState(null);
+  const [timer, setTimer] = useState(false);
 
   let { speechContent, setstep, step } = useContext(DataContext);
 
@@ -56,6 +61,10 @@ const ProfileScanner = () => {
     }
   };
 
+  const handleStartEnded = () => {
+    setTimer(true);
+  };
+
   const handlePageEnded = () => {
     console.log(imageData)
     axios.post(`${HOST}/post_user_image`, { "image": imageData })
@@ -79,59 +88,70 @@ const ProfileScanner = () => {
   };
 
 
-  useEffect(() => {
-    runFaceMesh();
-    console.log('call run facemesh')
-  }, []);
+  // useEffect(() => {
+  //   runFaceMesh();
+  //   console.log('call run facemesh')
+  // }, []);
 
 
   return (
-    <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
-      <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
-        <div>
-          {!imageData && <Webcam onLoadStart={() => runFaceMesh()} ref={webcamRef} />}
-          <img
-            src={`${imageData}`}
-            className={!imageData ? "hidden" : ""}
-            alt="Captured Profile"
-          />
-          <canvas ref={canvasRef} className="hidden" />
-          {!imageData &&
-            <div className="flex flex-wrap rounded-xl bg-gray-300 max-w-sm mx-auto mt-8 p-3">
-              Please make sure your face is clearly visible and in proper lighting.
+      <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
+        <div className="flex flex-col lg:flex-row gap-4 justify-center">
+          <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
+            <div>
+              {!imageData && <Webcam onLoadStart={() => runFaceMesh()} ref={webcamRef} />}
+              <img
+                src={`${imageData}`}
+                className={!imageData ? "hidden" : ""}
+                alt="Captured Profile"
+              />
+               {timer && (
+                <div className="mt-3 font-semibold text-xl">
+                  <Countdown
+                    date={Date.now() + 10000}
+                    renderer={renderer}
+                    onComplete={() => {
+                      setTimer(false);
+                      runFaceMesh();
+                    }}
+                  />
+                </div>
+              )}
+              <canvas ref={canvasRef} className="hidden" />
             </div>
-          }
+          </div>
+          <Contentbg content={'Please make sure your face is clearly visible and in proper lighting.'} />
         </div>
-      </div>
-      {!imageData &&
-        <ReactAudioPlayer
-          id="audio"
-          src={Object.values(speechContent)[4]}
-          autoPlay={true}
-        />
-      }
-      {
-        imageData &&
-        <div>
-          <button onClick={() => handlePageEnded()} className="bg-green-500 p-3 m-2 border-black rounded-md text-white">
-            Next
-          </button>
+        {!imageData &&
           <ReactAudioPlayer
             id="audio"
-            src={Object.values(speechContent)[5]}
+            src={Object.values(speechContent)[4]}
             autoPlay={true}
+            onEnded={handleStartEnded}
           />
-          <button onClick={() => handleRetake()} className="bg-red-500 p-3 m-2 border-black rounded-md text-white">
-            Retake
-          </button>
-          {/* <ReactAudioPlayer
+        }
+        {
+          imageData &&
+          <div>
+            <button onClick={() => handlePageEnded()} className="bg-green-500 p-3 m-2 border-black rounded-md text-white">
+              Next
+            </button>
+            <ReactAudioPlayer
+              id="audio"
+              src={Object.values(speechContent)[5]}
+              autoPlay={true}
+            />
+            <button onClick={() => handleRetake()} className="bg-red-500 p-3 m-2 border-black rounded-md text-white">
+              Retake
+            </button>
+            {/* <ReactAudioPlayer
             id="audio"
             src={Object.values(speechContent)[5]}
             autoPlay={true}
           /> */}
-        </div>
-      }
-    </article>
+          </div>
+        }
+      </article>
   );
 };
 

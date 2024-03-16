@@ -5,6 +5,7 @@ import ReactAudioPlayer from "react-audio-player";
 import axios from "axios";
 import { HOST } from "../../shared/const/const";
 import Countdown, { zeroPad } from "react-countdown";
+import Contentbg from "../../UI/contentbg";
 
 const SignatureScanner = () => {
   const webcamRef = useRef(null);
@@ -17,10 +18,10 @@ const SignatureScanner = () => {
   const [timer, setTimer] = useState(false);
 
   // useEffect(() => {
-    // Captures after 5 seconds
-    // setTimeout(() => {
-    //   captureScreenshot();
-    // }, 10000);
+  // Captures after 5 seconds
+  // setTimeout(() => {
+  //   captureScreenshot();
+  // }, 10000);
   // }, []);
 
   const renderer = ({ hours, minutes, seconds }) => {
@@ -85,30 +86,33 @@ const SignatureScanner = () => {
 
   return (
     <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
-      <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
-        {ready && (
-          <div>
-            <Webcam ref={webcamRef} className={imageData ? "hidden" : ""} />
-            <img
-              src={`${imageData}`}
-              className={!imageData ? "hidden" : ""}
-              alt="Captured Profile"
-            />
-            {timer && (
-              <div className="mt-3 font-semibold text-xl">
-                <Countdown
-                  date={Date.now() + 10000}
-                  renderer={renderer}
-                  onComplete={() => {
-                    setTimer(false);
-                    captureScreenshot();
-                  }}
-                />
-              </div>
-            )}
-            <canvas ref={canvasRef} className="hidden" />
-          </div>
-        )}
+      <div className="flex flex-col lg:flex-row gap-4 justify-center">
+        <div className="rounded-lg border border-blue-700 p-4 flex items-center justify-between">
+          {ready && (
+            <div>
+              <Webcam ref={webcamRef} className={imageData ? "hidden" : ""} />
+              <img
+                src={`${imageData}`}
+                className={!imageData ? "hidden" : ""}
+                alt="Captured Profile"
+              />
+              {timer && (
+                <div className="mt-3 font-semibold text-xl">
+                  <Countdown
+                    date={Date.now() + 5000}
+                    renderer={renderer}
+                    onComplete={() => {
+                      setTimer(false);
+                      captureScreenshot();
+                    }}
+                  />
+                </div>
+              )}
+              <canvas ref={canvasRef} className="hidden" />
+            </div>
+          )}
+        </div>
+        <Contentbg content={'Please sign in the paper and show it in the camera. Your camera will be started whenever you press green button and 5 seconds timer will start. Take your paper and show in camera closely, be steady till the scanning timing completes.'} />
       </div>
       {
         !ready &&
