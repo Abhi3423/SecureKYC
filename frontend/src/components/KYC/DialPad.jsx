@@ -23,7 +23,7 @@ const DialPad = () => {
           setstep(1);
           console.log(speechContent);
           setLoading(false);
-        }, 4000);
+        }, 2000);
       })
       .catch((error) => {
         console.error("Error fetching audio:", error);

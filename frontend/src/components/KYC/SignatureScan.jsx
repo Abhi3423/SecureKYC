@@ -75,7 +75,7 @@ const SignatureScanner = () => {
         setTimeout(() => {
           setLoading(false);
           setstep(9);
-        }, 3000);
+        }, 2000);
       })
       .catch((error) => {
         console.error("Error uploading image:", error);

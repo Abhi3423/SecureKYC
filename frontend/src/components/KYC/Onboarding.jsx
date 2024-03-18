@@ -13,7 +13,7 @@ export const Step1 = () => {
     setTimeout(() => {
       setstep(2);
       setLoading(false)
-    }, 5000);
+    }, 500);
   };
   return (
     <div>
@@ -49,7 +49,7 @@ export const Step2 = () => {
     setTimeout(() => {
       setstep(3);
       setLoading(false);
-    }, 5000);
+    }, 500);
   };
   return (
     <div className="flex flex-col w-full p-6 lg:p-10 gap-4 lg:flex-row justify-evenly items-start">
@@ -112,7 +112,7 @@ export const Step3 = () => {
     setTimeout(() => {
       setstep(4);
       setLoading(false);
-    }, 5000);
+    }, 500);
   };
   return (
     <div className="flex flex-col w-full p-6 lg:p-10 gap-4 lg:flex-row justify-evenly items-start">

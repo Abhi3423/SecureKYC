@@ -61,7 +61,7 @@ const PanScanning = () => {
         setTimeout(() => {
           setstep(6);
           setLoading(false);
-        }, 3000);
+        }, 2000);
       })
       .catch(error => {
         console.error('Error uploading image:', error);

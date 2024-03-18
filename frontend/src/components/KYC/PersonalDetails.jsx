@@ -94,7 +94,7 @@ export const Step1Employ = () => {
     setTimeout(() => {
       setLoading(false);
       setstep(10);
-    }, 2000);
+    }, 500);
   }
 
   return (
@@ -179,7 +179,7 @@ export const Step2Employ = () => {
     setTimeout(() => {
       setLoading(false);
       setstep(11);
-    }, 2000);
+    }, 500);
   }
   return (
     <article className="rounded-xl border border-blue-700 bg-gray-100 p-4 m-4 mt-11">
