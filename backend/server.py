@@ -108,6 +108,7 @@ def ocr_back():
 def get_data():
     if request.method == 'GET':
         
+        
         with open('pesonal_user_data.json') as f:
             data = json.load(f)  # Load the JSON data from the file
         
